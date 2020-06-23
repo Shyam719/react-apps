@@ -1,0 +1,14 @@
+{
+  "header": {
+    "appName": "Feed App",
+    "language": "Language",
+    "theme": "Theme",
+    "welcome": "Welcome, {{username}}",
+    "menu": {
+      "newpost": "New Post",
+      "home": "Home",
+      "signin": "Sign In",
+      "signup": "Sign up"
+    }
+  }
+}

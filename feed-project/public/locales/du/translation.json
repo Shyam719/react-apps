@@ -1,0 +1,12 @@
+{
+  "header": {
+    "appName": "Feed App - Dutch",
+    "language": "Language - D",
+    "menu": {
+      "newpost": "New Post",
+      "home": "Home",
+      "signin": "Sign In",
+      "signup": "Sign up"
+    }
+  }
+}

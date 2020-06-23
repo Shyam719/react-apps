@@ -1,0 +1,31 @@
+.tags-container {
+  padding: 20px 7px;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  margin: 10px;
+  background-color: #fff;
+}
+
+.tags-container > span {
+  margin: 7px;
+  padding: 5px;
+  background: #ccc;
+}
+
+.tags-container > .tag-default {
+  color: #fff !important;
+  font-size: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  white-space: nowrap;
+  margin-right: 3px;
+  margin-bottom: 0.2rem;
+  display: inline-block;
+  background-color: #818a91;
+}
+
+.tags-container > .tag-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}

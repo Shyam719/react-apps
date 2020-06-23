@@ -1,0 +1,14 @@
+export const APP_LOAD = "APP_LOAD";
+export const LOGIN = "LOGIN";
+export const REGISTER = "REGISTER";
+export const UPDATE_FIELD_AUTH = "UPDATE_FIELD_AUTH";
+export const LOGOUT = "LOGOUT";
+export const LOGIN_PAGE_UNLOADED = "LOGIN_PAGE_UNLOADED";
+export const REGISTER_PAGE_UNLOADED = "REGISTER_PAGE_UNLOADED";
+export const ASYNC_START = "ASYNC_START";
+export const ASYNC_END = "ASYNC_END";
+export const REDIRECT = "REDIRECT";
+export const CHANGE_TAB = "CHANGE_TAB";
+export const HOME_PAGE_LOADED = "HOME_PAGE_LOADED";
+export const APPLY_TAG_FILTER = "APPLY_TAG_FILTER";
+export const MY_POSTS = "MY_POSTS";
