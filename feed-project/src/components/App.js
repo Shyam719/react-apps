@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
   onRedirect: () => dispatch({ type: REDIRECT }),
 });
 
-class App extends React.Component {
+export class App extends React.Component {
   /*componentWillReceiveProps(nextProps) {
     console.log('...................... compwillreceiveprops');
     console.log(nextProps);

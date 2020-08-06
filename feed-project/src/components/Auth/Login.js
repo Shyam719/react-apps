@@ -24,12 +24,17 @@ const mapStateToProps = (state) => {
   return { ...state.auth, loading: state.common.loading };
 };
 
-const onFieldChange = (key, value) => (dispatch) =>
+const submitLoginReq = async (email, password) => {
+  return await agent.Auth.login(email, password);
+};
+
+export const onFieldChange = (key, value) => (dispatch) =>
   dispatch({ type: UPDATE_FIELD_AUTH, key, value });
-const onSubmit = (email, password) => {
+
+export const onSubmit = (email, password) => {
   return async (dispatch) => {
     dispatch({ type: ASYNC_START, subtype: LOGIN });
-    const res = await agent.Auth.login(email, password);
+    const res = await submitLoginReq(email, password);
     if (res.status === 200) {
       dispatch({ type: LOGIN, payload: res });
       dispatch({ type: ASYNC_END, payload: res });
@@ -41,7 +46,7 @@ const onSubmit = (email, password) => {
 };
 const onUnload = () => (dispatch) => dispatch({ type: LOGIN_PAGE_UNLOADED });
 
-class Login extends React.Component {
+export class Login extends React.Component {
   constructor(props) {
     super(props);
     this.onFieldChange = (key, value) => this.props.onFieldChange(key, value);

@@ -9,14 +9,18 @@ import { connect } from "react-redux";
 import agent from "../../agent";
 import Loader from "../Loader";
 
-const fetchData = async (dispatch, tab, articlesPromise) => {
-  dispatch({ type: ASYNC_START, subtype: CHANGE_TAB });
-  const res = await articlesPromise();
-  if (res.status === 200) {
-    dispatch({ type: CHANGE_TAB, payload: res, tab: tab });
-    dispatch({ type: ASYNC_END, payload: res });
-  } else {
-    dispatch({ type: ASYNC_END, payload: res });
+export const fetchData = async (dispatch, tab, articlesPromise) => {
+  try {
+    dispatch({ type: ASYNC_START, subtype: CHANGE_TAB });
+    const res = await articlesPromise();
+    if (res.status === 200) {
+      dispatch({ type: CHANGE_TAB, payload: res, tab: tab });
+      dispatch({ type: ASYNC_END, payload: res });
+    } else {
+      dispatch({ type: ASYNC_END, payload: res });
+    }
+  } catch (e) {
+    console.error(e);
   }
 };
 
@@ -30,7 +34,11 @@ const GlobalFeedTab = (props) => {
     <li className="nav-item">
       <a
         href={hrefLink}
-        className={props.tab === "all" ? "nav-link active" : "nav-link"}
+        className={
+          props.tab === "all"
+            ? "nav-link active global-feed"
+            : "nav-link global-feed"
+        }
         onClick={clickHandler}
       >
         Global Feed
@@ -50,7 +58,11 @@ const YourFeedTab = (props) => {
       <li className="nav-item">
         <a
           href={hrefLink}
-          className={props.tab === "feed" ? "nav-link active" : "nav-link"}
+          className={
+            props.tab === "feed"
+              ? "nav-link active your-feed"
+              : "nav-link your-feed"
+          }
           onClick={clickHandler}
         >
           Your Feed
@@ -87,9 +99,9 @@ const mapDispatchToProps = (dispatch) => ({
     fetchData(dispatch, tab, articlesPromise),
 });
 
-const MainView = (props) => {
+export const MainView = (props) => {
   return (
-    <div className="col-12">
+    <div className="col-sm-12 col-md-8 col-l-8">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
           <YourFeedTab

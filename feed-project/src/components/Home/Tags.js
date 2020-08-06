@@ -5,7 +5,7 @@ const Tags = (props) => {
   const tags = props.tags;
   if (tags) {
     return (
-      <div className="tags-container">
+      <div className="tags-container col-sm-12 col-md-4 col-l-4">
         {tags.map((tag) => {
           const handleClick = (ev) => {
             ev.preventDefault();

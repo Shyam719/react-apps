@@ -1,7 +1,4 @@
-import superagentPromise from "superagent-promise";
-import _superagent from "superagent";
-
-const superagent = superagentPromise(_superagent, global.Promise);
+import axios from "axios";
 
 const API_ROOT = "https://conduit.productionready.io/api";
 //const API_ROOT = 'http://localhost:5000/api';
@@ -10,44 +7,35 @@ const encode = encodeURIComponent;
 const successResponse = (res) => {
   return {
     status: res.status,
-    data: res.body,
+    data: res.data,
   };
 };
 const errorResponse = (err) => {
   return {
     status: err.status,
-    errors: err.response.body,
+    errors: err.response ? err.response.data : err,
   };
 };
 
 let token = null;
 const tokenPlugin = (req) => {
   if (token) {
-    req.set("authorization", `Token ${token}`);
+    req.headers.Authorization = `Token ${token}`;
   }
+  return req;
 };
+
+axios.interceptors.request.use(tokenPlugin);
 
 const requests = {
   del: (url) =>
-    superagent
-      .del(`${API_ROOT}${url}`)
-      .use(tokenPlugin)
-      .then(successResponse, errorResponse),
+    axios.del(`${API_ROOT}${url}`).then(successResponse, errorResponse),
   get: (url) =>
-    superagent
-      .get(`${API_ROOT}${url}`)
-      .use(tokenPlugin)
-      .then(successResponse, errorResponse),
+    axios.get(`${API_ROOT}${url}`).then(successResponse, errorResponse),
   post: (url, body) =>
-    superagent
-      .post(`${API_ROOT}${url}`, body)
-      .use(tokenPlugin)
-      .then(successResponse, errorResponse),
+    axios.post(`${API_ROOT}${url}`, body).then(successResponse, errorResponse),
   put: (url, body) =>
-    superagent
-      .put(`${API_ROOT}${url}`, body)
-      .use(tokenPlugin)
-      .then(successResponse, errorResponse),
+    axios.put(`${API_ROOT}${url}`, body).then(successResponse, errorResponse),
 };
 
 const Auth = {

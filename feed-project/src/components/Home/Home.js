@@ -74,8 +74,8 @@ class Home extends React.Component {
       <div className="home-page">
         <div className="container-fluid page">
           <div className="row">
-            <Tags tags={this.props.tags} onClickTag={this.props.onFilterTab} />
             <MainView />
+            <Tags tags={this.props.tags} onClickTag={this.props.onFilterTab} />
           </div>
         </div>
       </div>

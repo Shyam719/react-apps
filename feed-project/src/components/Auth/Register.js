@@ -24,12 +24,17 @@ const mapStateToProps = (state) => {
   return { ...state.auth, loading: state.common.loading };
 };
 
-const onFieldChange = (key, value) => (dispatch) =>
+const submitRegisterReq = async (email, password, username) => {
+  return await agent.Auth.register(email, password, username);
+};
+
+export const onFieldChange = (key, value) => (dispatch) =>
   dispatch({ type: UPDATE_FIELD_AUTH, key, value });
-const onSubmit = (email, password, username) => {
+
+export const onSubmit = (email, password, username) => {
   return async (dispatch) => {
     dispatch({ type: ASYNC_START, subtype: REGISTER });
-    const res = await agent.Auth.register(email, password, username);
+    const res = await submitRegisterReq(email, password, username);
     if (res.status === 200) {
       dispatch({ type: REGISTER, payload: res });
       dispatch({ type: ASYNC_END, payload: res });
@@ -41,7 +46,7 @@ const onSubmit = (email, password, username) => {
 };
 const onUnload = () => (dispatch) => dispatch({ type: REGISTER_PAGE_UNLOADED });
 
-class Register extends React.Component {
+export class Register extends React.Component {
   constructor() {
     super();
     this.onFieldChange = (key, value) => this.props.onFieldChange(key, value);
